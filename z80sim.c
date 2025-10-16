@@ -7,22 +7,22 @@
 
 static byte memory[ 0x10000 ];
 
-static byte getChar(int param, ushort address) {
+static byte getChar(size_t param, ushort address) {
 	return ((address & 0xFF) != STDIOPORT) ? 0 : (byte)getchar();
 }
 
-static void putChar(int param, ushort address, byte data) {
+static void putChar(size_t param, ushort address, byte data) {
 	if ((address & 0xFF) == STDIOPORT) {
 		putchar(data);
 		fflush(stdout);
 	}
 }
 
-static byte getMem(int param, ushort address) {
+static byte getMem(size_t param, ushort address) {
 	return memory[address];
 }
 
-static void putMem(int param, ushort address, byte data) {
+static void putMem(size_t param, ushort address, byte data) {
 	memory[address] = data;
 }
 
