@@ -35,19 +35,23 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	if((f = fopen(argv[1], "r")) == NULL) {
-		fprintf(stderr, "%s not found", argv[1]);
+		fprintf(stderr, "%s not found\n", argv[1]);
 		return errno;
 	}
-	for(i = 0; (i < 0x10000) && ((c = getc(f)) != EOF); i++) memory[i] = (byte)c;
+	for (i = 0; (i < 0x10000) && ((c = getc(f)) != EOF); i++)
+            memory[i] = (byte)c;
+        fprintf(stderr, "read %d bytes to memory\n", i);
 	while(i < 0x10000) memory[i++] = HALT;
 	fclose(f);
 	context.memRead = getMem;
 	context.memWrite = putMem;
 	context.ioRead = getChar;
 	context.ioWrite = putChar;
+        fprintf(stderr, "reset\n");
 	Z80RESET(&context);
 	while(!context.halted)
 		Z80Execute(&context);
 	fflush(stdout);
+        fprintf(stderr, "returning normally\n");
 	return 0;
 }
