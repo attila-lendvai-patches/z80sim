@@ -1,6 +1,6 @@
-CC := gcc
-CFLAGS := -Wall -O3
-LDFLAGS := -lz80ex
+CC ?= cc
+CFLAGS += -Wall -O3
+LDFLAGS += -lz80ex
 TARGET := z80sim
 SRC := z80sim.c
 
