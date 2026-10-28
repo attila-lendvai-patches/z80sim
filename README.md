@@ -26,6 +26,27 @@ or directly:
 $ gcc z80sim.c -o z80sim -lz80ex
 ```
 
+### With Guix
+
+Authorize the checkout once so `guix shell` can load
+[`manifest.scm`](manifest.scm) automatically:
+
+```sh
+$ echo "$PWD" >> ~/.config/guix/shell-authorized-directories
+$ guix shell
+[env]$ make
+```
+
+For an isolated container, use `guix shell -C` the same way.  Auto-loading
+only happens in the interactive shell; to run a command directly, pass
+`-m manifest.scm`:
+
+```sh
+$ guix shell -m manifest.scm -- make
+```
+
+`z80ex` packaging is being upstreamed at the time of writing.
+
 ## Usage
 
 The executable takes a single filename argument for the file to be loaded into the RAM of the 
